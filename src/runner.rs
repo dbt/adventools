@@ -2,11 +2,13 @@ use std::time::Instant;
 
 use anyhow::Result;
 
-use crate::day::Day;
+use crate::{day::Day, fetch::Fetcher};
 
-pub fn run(days: Vec<Box<dyn Day>>) -> Result<()> {
+pub fn run(year: u32, days: Vec<Box<dyn Day>>) -> Result<()> {
+    let fetcher = Fetcher::new(year);
     for d in days {
         {
+            fetcher.check(d.number())?;
             print!("Day {} part 1: ", d.number());
             let i1 = Instant::now();
             let res1 = d.part01();
