@@ -1,6 +1,11 @@
 pub use anyhow::Result;
+
+use crate::prelude::read_lines;
 pub trait Day {
     fn number(&self) -> u8;
     fn part01(&self) -> Result<()>;
     fn part02(&self) -> Result<()>;
+    fn input(&self) -> Result<Vec<String>> {
+        read_lines(&format!("input{:02}.txt", self.number()))
+    }
 }
